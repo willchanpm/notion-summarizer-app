@@ -180,7 +180,7 @@ npm run lint
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | Your OpenAI API key | `sk-...` |
 | `NOTION_API_KEY` | Your Notion integration token | `secret_...` |
-| `NOTION_DATABASE_ID` | Your Notion database ID | `23ef2688cd848046b0000e38a01825f8` |
+| `NOTION_DATABASE_ID` | Your Notion database ID | `23ef2688cd848045a0000e38a01825g5` |
 
 ## 🔒 Security
 
