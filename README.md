@@ -1,11 +1,12 @@
 # 🎤 Notion Meeting Summarizer
 
-A Next.js web application that records meetings, transcribes them using OpenAI's Whisper API, generates summaries with GPT-4, and saves everything to Notion.
+A Next.js web application that records meetings, transcribes them using OpenAI's Whisper API, generates summaries with GPT-4, and saves everything to Notion. **Now with automatic speaker diarization!**
 
 ## ✨ Features
 
 - **🎙️ Audio Recording**: Record meetings directly in your browser using the MediaRecorder API
 - **🤖 AI Transcription**: Convert speech to text using OpenAI's Whisper API
+- **👥 Speaker Diarization**: Automatically identify and label different speakers in the conversation
 - **📝 AI Summarization**: Generate bullet-point summaries using OpenAI's GPT-4
 - **📚 Notion Integration**: Automatically save transcripts and summaries to your Notion database
 - **🎨 Modern UI**: Clean, responsive interface with dark green theme
@@ -100,14 +101,16 @@ A Next.js web application that records meetings, transcribes them using OpenAI's
 2. **Record Your Meeting**
    - Click "Start Recording" to begin
    - Speak clearly into your microphone
+   - **Multiple speakers are automatically detected and labeled**
    - Click "Stop Recording" when finished
 
 3. **Wait for Processing**
    - The app will show "Transcribing..." while processing
-   - This may take 10-30 seconds depending on audio length
+   - This may take 15-45 seconds depending on audio length
+   - Processing includes: transcription → speaker diarization → summarization
 
 4. **Review Results**
-   - View the full transcript
+   - View the full transcript with speaker labels (Speaker 1, Speaker 2, etc.)
    - Read the AI-generated summary
    - Both are displayed in a clean, readable format
 
@@ -134,7 +137,7 @@ notion-summarizer/
 │   ├── Recorder.tsx                           # Audio recording component
 │   └── SummaryCard.tsx                        # Results display component
 ├── lib/
-│   ├── openai.ts                              # OpenAI API functions
+│   ├── openai.ts                              # OpenAI API functions (with speaker diarization)
 │   └── notion.ts                              # Notion API functions
 ├── .env                                       # Environment variables
 └── README.md
@@ -146,6 +149,7 @@ notion-summarizer/
 - **Method**: POST
 - **Body**: FormData with audio file
 - **Returns**: `{ transcript: string, summary: string }`
+- **Features**: Whisper transcription + GPT-4 speaker diarization + GPT-4 summarization
 
 ### `/api/push-to-notion`
 - **Method**: POST
@@ -180,7 +184,7 @@ npm run lint
 |----------|-------------|---------|
 | `OPENAI_API_KEY` | Your OpenAI API key | `sk-...` |
 | `NOTION_API_KEY` | Your Notion integration token | `secret_...` |
-| `NOTION_DATABASE_ID` | Your Notion database ID | `23ef2688cd848045a0000e38a01825g5` |
+| `NOTION_DATABASE_ID` | Your Notion database ID | `23ef2688cd848046b0000e38a01825f8` |
 
 ## 🔒 Security
 
@@ -188,6 +192,15 @@ npm run lint
 - All API calls are made server-side via Next.js API routes
 - No sensitive data is exposed to the client
 - Audio processing happens securely on the server
+
+## 🎤 Speaker Diarization
+
+The app now automatically identifies different speakers in your meetings:
+
+- **Automatic Detection**: GPT-4 analyzes conversation patterns to identify speaker changes
+- **Speaker Labels**: Each speaker is labeled as "Speaker 1", "Speaker 2", etc.
+- **Visual Formatting**: Speaker labels are highlighted in the transcript display
+- **Fallback**: If speaker detection fails, the raw transcript is still provided
 
 ## 🐛 Troubleshooting
 
@@ -211,6 +224,11 @@ npm run lint
   - `Name` (Title type)
   - `Transcript` (Text type)
   - `Summary` (Text type)
+
+**"Speaker diarization not working"**
+- This is normal for very short recordings or single-speaker content
+- The app will fallback to the raw transcript if speaker detection fails
+- Longer conversations with multiple speakers work best
 
 ### Debug Tools
 

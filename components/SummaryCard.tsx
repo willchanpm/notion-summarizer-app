@@ -1,6 +1,6 @@
 // This component displays meeting transcripts and summaries
 // It receives the transcribed text and summary from the parent component
-// and presents them in a clean, readable format
+// and presents them in a clean, readable format with speaker diarization
 
 import React from 'react';
 
@@ -11,6 +11,28 @@ interface SummaryCardProps {
 }
 
 const SummaryCard: React.FC<SummaryCardProps> = ({ transcript, summary }) => {
+  // Function to format transcript with speaker highlighting
+  const formatTranscript = (text: string) => {
+    // Split by lines and format speaker labels
+    const lines = text.split('\n');
+    return lines.map((line, index) => {
+      // Check if line starts with a speaker label (Speaker 1:, Speaker 2:, etc.)
+      const speakerMatch = line.match(/^(Speaker \d+:)/);
+      if (speakerMatch) {
+        const speakerLabel = speakerMatch[1];
+        const content = line.substring(speakerLabel.length).trim();
+        return (
+          <div key={index} className="speaker-line">
+            <span className="speaker-label">{speakerLabel}</span>
+            <span className="speaker-content">{content}</span>
+          </div>
+        );
+      }
+      // If no speaker label, just return the line as is
+      return <div key={index} className="transcript-line">{line}</div>;
+    });
+  };
+
   return (
     <div className="summary-card">
       {/* Summary section */}
@@ -22,7 +44,9 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ transcript, summary }) => {
       {/* Transcript section */}
       <div className="transcript-section">
         <h3>Full Transcript</h3>
-        <p className="transcript-text">{transcript}</p>
+        <div className="transcript-text">
+          {formatTranscript(transcript)}
+        </div>
       </div>
       
       {/* Basic styling */}
@@ -74,6 +98,29 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ transcript, summary }) => {
           border-left: 4px solid #10b981;
           border: 1px solid #d1fae5;
           white-space: pre-wrap;
+        }
+        
+        .speaker-line {
+          margin-bottom: 0.75rem;
+          padding: 0.5rem;
+          background-color: #f9fafb;
+          border-radius: 6px;
+          border-left: 3px solid #3b82f6;
+        }
+        
+        .speaker-label {
+          font-weight: 600;
+          color: #1e40af;
+          margin-right: 0.5rem;
+        }
+        
+        .speaker-content {
+          color: #374151;
+        }
+        
+        .transcript-line {
+          margin-bottom: 0.5rem;
+          color: #6b7280;
         }
       `}</style>
     </div>
