@@ -24,7 +24,7 @@ A Next.js web application that records meetings, transcribes them using OpenAI's
 
 1. **Clone the repository**
    ```bash
-   git clone <your-repo-url>
+   git clone "https://github.com/willchanpm/notion-summarizer-app"
    cd notion-summarizer
    ```
 

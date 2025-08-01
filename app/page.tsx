@@ -3,97 +3,99 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        {/* App title and description */}
-        <div className="text-center sm:text-left">
-          <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-            Meeting Recorder
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-            Record your meetings and get AI-powered transcripts and summaries
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <main className="text-center">
+          {/* Hero Section */}
+          <div className="mb-16">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              Meeting Recorder
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Record your meetings and get AI-powered transcripts with speaker identification and summaries
+            </p>
+          </div>
 
-        {/* Main action button */}
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <Link
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-green-700 text-white gap-2 hover:bg-green-800 font-medium text-sm sm:text-base h-12 px-6 sm:px-8 sm:w-auto"
-            href="/record"
-          >
-            🎤 Start Recording
-          </Link>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+          {/* Main Action Button */}
+          <div className="mb-16">
+            <Link
+              href="/record"
+              className="inline-flex items-center px-8 py-4 bg-blue-600 text-white text-lg font-semibold rounded-xl shadow-lg hover:bg-blue-700 transform hover:scale-105 transition-all duration-200"
+            >
+              🎤 Start Recording
+            </Link>
+          </div>
 
-        {/* Feature list */}
-        <div className="mt-8 text-center sm:text-left">
-          <h2 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-            Features:
-          </h2>
-          <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
-            <li>🎙️ Record audio directly in your browser</li>
-            <li>🤖 AI-powered transcription and summarization</li>
-            <li>📝 Get both full transcript and concise summary</li>
-            <li>💾 Save your meeting notes easily</li>
-          </ul>
-        </div>
-      </main>
-      
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          {/* Features Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="text-3xl mb-4">🎙️</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Record Audio</h3>
+              <p className="text-gray-600">Record meetings directly in your browser with crystal clear audio</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="text-3xl mb-4">🤖</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">AI Transcription</h3>
+              <p className="text-gray-600">Convert speech to text using OpenAI's advanced Whisper API</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="text-3xl mb-4">👥</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Speaker Detection</h3>
+              <p className="text-gray-600">Automatically identify and label different speakers in conversations</p>
+            </div>
+            
+            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+              <div className="text-3xl mb-4">📝</div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Smart Summaries</h3>
+              <p className="text-gray-600">Get AI-generated bullet-point summaries of key points and decisions</p>
+            </div>
+          </div>
+
+          {/* How It Works */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">How It Works</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-blue-600 font-bold text-lg">1</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Record</h3>
+                <p className="text-gray-600">Click start and record your meeting with crystal clear audio</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-blue-600 font-bold text-lg">2</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Process</h3>
+                <p className="text-gray-600">AI transcribes, identifies speakers, and creates summaries</p>
+              </div>
+              
+              <div className="text-center">
+                <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <span className="text-blue-600 font-bold text-lg">3</span>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">Save</h3>
+                <p className="text-gray-600">Save everything to Notion with one click</p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA Section */}
+          <div className="bg-blue-600 rounded-2xl p-8 text-white">
+            <h2 className="text-2xl font-bold mb-4">Ready to Transform Your Meetings?</h2>
+            <p className="text-blue-100 mb-6">Start recording and get AI-powered insights in minutes</p>
+            <Link
+              href="/record"
+              className="inline-flex items-center px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg hover:bg-gray-50 transition-colors"
+            >
+              Get Started Now
+            </Link>
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

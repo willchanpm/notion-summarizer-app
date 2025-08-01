@@ -22,107 +22,44 @@ const SummaryCard: React.FC<SummaryCardProps> = ({ transcript, summary }) => {
         const speakerLabel = speakerMatch[1];
         const content = line.substring(speakerLabel.length).trim();
         return (
-          <div key={index} className="speaker-line">
-            <span className="speaker-label">{speakerLabel}</span>
-            <span className="speaker-content">{content}</span>
+          <div key={index} className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r-lg mb-3">
+            <span className="font-semibold text-blue-700 mr-2">{speakerLabel}</span>
+            <span className="text-gray-700">{content}</span>
           </div>
         );
       }
       // If no speaker label, just return the line as is
-      return <div key={index} className="transcript-line">{line}</div>;
+      return <div key={index} className="text-gray-600 mb-2">{line}</div>;
     });
   };
 
   return (
-    <div className="summary-card">
+    <div className="space-y-6">
       {/* Summary section */}
-      <div className="summary-section">
-        <h3>Meeting Summary</h3>
-        <p className="summary-text">{summary}</p>
-      </div>
-      
-      {/* Transcript section */}
-      <div className="transcript-section">
-        <h3>Full Transcript</h3>
-        <div className="transcript-text">
-          {formatTranscript(transcript)}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="flex items-center mb-6">
+          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+            <span className="text-blue-600 text-xl">📝</span>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900">Meeting Summary</h3>
+        </div>
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
+          <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">{summary}</p>
         </div>
       </div>
       
-      {/* Basic styling */}
-      <style jsx>{`
-        .summary-card {
-          margin-top: 2rem;
-          padding: 2rem;
-          border: 2px solid #e5e7eb;
-          border-radius: 12px;
-          background-color: #ffffff;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-          text-align: left;
-        }
-        
-        .summary-section {
-          margin-bottom: 2rem;
-        }
-        
-        .transcript-section {
-          border-top: 1px solid #e5e7eb;
-          padding-top: 1.5rem;
-        }
-        
-        h3 {
-          color: #1f2937;
-          margin-bottom: 1rem;
-          font-size: 1.25rem;
-          font-weight: 600;
-        }
-        
-        .summary-text {
-          color: #374151;
-          line-height: 1.6;
-          margin: 0;
-          padding: 1.5rem;
-          background-color: #f0fdf4;
-          border-radius: 8px;
-          border-left: 4px solid #15803d;
-          border: 1px solid #bbf7d0;
-        }
-        
-        .transcript-text {
-          color: #374151;
-          line-height: 1.6;
-          margin: 0;
-          padding: 1.5rem;
-          background-color: #f8fafc;
-          border-radius: 8px;
-          border-left: 4px solid #10b981;
-          border: 1px solid #d1fae5;
-          white-space: pre-wrap;
-        }
-        
-        .speaker-line {
-          margin-bottom: 0.75rem;
-          padding: 0.5rem;
-          background-color: #f9fafb;
-          border-radius: 6px;
-          border-left: 3px solid #3b82f6;
-        }
-        
-        .speaker-label {
-          font-weight: 600;
-          color: #1e40af;
-          margin-right: 0.5rem;
-        }
-        
-        .speaker-content {
-          color: #374151;
-        }
-        
-        .transcript-line {
-          margin-bottom: 0.5rem;
-          color: #6b7280;
-        }
-      `}</style>
+      {/* Transcript section */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <div className="flex items-center mb-6">
+          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+            <span className="text-blue-600 text-xl">🎤</span>
+          </div>
+          <h3 className="text-2xl font-bold text-gray-900">Full Transcript</h3>
+        </div>
+        <div className="bg-gray-50 border border-gray-200 rounded-xl p-6 max-h-96 overflow-y-auto">
+          {formatTranscript(transcript)}
+        </div>
+      </div>
     </div>
   );
 };

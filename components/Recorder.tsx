@@ -81,92 +81,43 @@ const Recorder: React.FC<RecorderProps> = ({ onStop }) => {
   };
 
   return (
-    <div className="recorder-container">
-      {/* Main recording button */}
-      <button 
-        onClick={handleRecordingToggle}
-        className={`recording-button ${isRecording ? 'recording' : ''}`}
-        disabled={false} // You could disable this if needed
-      >
-        {/* Show different text and styling based on recording state */}
-        {isRecording ? 'Stop Recording' : 'Start Recording'}
-      </button>
-      
-      {/* Optional: Show recording status */}
-      {isRecording && (
-        <div className="recording-status">
-          <span className="recording-indicator">●</span>
-          Recording...
-        </div>
-      )}
-      
-      {/* Basic styling */}
-      <style jsx>{`
-        .recorder-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-          padding: 2rem;
-          border: 2px solid #e5e7eb;
-          border-radius: 12px;
-          background-color: #ffffff;
-          max-width: 350px;
-          margin: 0 auto;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
+    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+      <div className="text-center">
+        {/* Main recording button */}
+        <button 
+          onClick={handleRecordingToggle}
+          className={`inline-flex items-center px-8 py-4 text-lg font-semibold rounded-xl shadow-lg transition-all duration-200 transform hover:scale-105 ${
+            isRecording 
+              ? 'bg-red-600 hover:bg-red-700 text-white' 
+              : 'bg-blue-600 hover:bg-blue-700 text-white'
+          }`}
+          disabled={false}
+        >
+          <div className={`w-4 h-4 rounded-full mr-3 ${
+            isRecording ? 'bg-red-200 animate-pulse' : 'bg-blue-200'
+          }`}></div>
+          {isRecording ? 'Stop Recording' : 'Start Recording'}
+        </button>
         
-        .recording-button {
-          padding: 14px 28px;
-          font-size: 16px;
-          font-weight: 600;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          background-color: #15803d;
-          color: white;
-          box-shadow: 0 2px 4px rgba(21, 128, 61, 0.2);
-        }
+        {/* Recording status */}
+        {isRecording && (
+          <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+            <div className="flex items-center justify-center space-x-2">
+              <div className="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+              <span className="text-red-700 font-medium">Recording in progress...</span>
+            </div>
+            <p className="text-sm text-red-600 mt-2">Click the button above to stop recording</p>
+          </div>
+        )}
         
-        .recording-button:hover {
-          background-color: #166534;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(21, 128, 61, 0.3);
-        }
-        
-        .recording-button.recording {
-          background-color: #dc2626;
-          box-shadow: 0 2px 4px rgba(220, 38, 38, 0.2);
-        }
-        
-        .recording-button.recording:hover {
-          background-color: #b91c1c;
-          box-shadow: 0 4px 8px rgba(220, 38, 38, 0.3);
-        }
-        
-        .recording-status {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          color: #dc2626;
-          font-weight: 500;
-          padding: 0.5rem 1rem;
-          background-color: #fef2f2;
-          border-radius: 6px;
-          border: 1px solid #fecaca;
-        }
-        
-        .recording-indicator {
-          color: #dc2626;
-          animation: pulse 1.5s infinite;
-        }
-        
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.5; }
-        }
-      `}</style>
+        {/* Instructions */}
+        {!isRecording && (
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-xl">
+            <p className="text-blue-700 font-medium">Ready to record</p>
+            <p className="text-sm text-blue-600 mt-1">Click the button above to start recording your meeting</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -105,169 +105,84 @@ export default function RecordPage() {
   };
 
   return (
-    <div className="record-page">
-      {/* Navigation back to homepage */}
-      <nav className="navigation">
-        <Link href="/" className="back-link">
-          ← Back to Home
-        </Link>
-      </nav>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Navigation */}
+        <nav className="mb-8">
+          <Link 
+            href="/" 
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium transition-colors"
+          >
+            ← Back to Home
+          </Link>
+        </nav>
 
-      {/* Main heading for the record page */}
-      <h1>Record Meeting</h1>
-      
-      {/* Audio recorder component */}
-      <Recorder onStop={handleRecordingStop} />
-      
-      {/* Loading indicator while processing audio */}
-      {loading && (
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p>Transcribing...</p>
+        {/* Main Content */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Record Meeting
+          </h1>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Record your meeting and get AI-powered transcription with speaker identification and summaries
+          </p>
         </div>
-      )}
-      
-      {/* Display results if we have transcript and summary */}
-      {transcript && summary && (
-        <div className="results-container">
-          <SummaryCard transcript={transcript} summary={summary} />
-          
-          {/* Push to Notion button */}
-          <div className="notion-section">
-            <button 
-              onClick={handlePushToNotion}
-              disabled={pushingToNotion}
-              className="notion-button"
-            >
-              {pushingToNotion ? 'Pushing to Notion...' : '📝 Save to Notion'}
-            </button>
-            
-            {/* Notion status message */}
-            {notionStatus && (
-              <p className="notion-status">{notionStatus}</p>
-            )}
+        
+        {/* Audio recorder component */}
+        <div className="mb-8">
+          <Recorder onStop={handleRecordingStop} />
+        </div>
+        
+        {/* Loading indicator while processing audio */}
+        {loading && (
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-8">
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin mb-4"></div>
+              <p className="text-lg font-medium text-gray-700">Processing your recording...</p>
+              <p className="text-sm text-gray-500 mt-2">This may take 15-45 seconds</p>
+            </div>
           </div>
-        </div>
-      )}
-      
-      {/* Basic styling */}
-      <style jsx>{`
-        .record-page {
-          max-width: 800px;
-          margin: 0 auto;
-          padding: 2rem;
-          text-align: center;
-          background-color: #ffffff;
-          min-height: 100vh;
-        }
+        )}
         
-        .navigation {
-          text-align: left;
-          margin-bottom: 2rem;
-        }
-        
-        .back-link {
-          display: inline-flex;
-          align-items: center;
-          color: #15803d;
-          text-decoration: none;
-          font-weight: 500;
-          padding: 0.5rem 1rem;
-          border-radius: 6px;
-          transition: all 0.2s ease;
-          background-color: #f0fdf4;
-          border: 1px solid #bbf7d0;
-        }
-        
-        .back-link:hover {
-          background-color: #dcfce7;
-          color: #166534;
-          transform: translateY(-1px);
-        }
-        
-        h1 {
-          color: #1f2937;
-          margin-bottom: 2rem;
-          font-size: 2.5rem;
-          font-weight: bold;
-        }
-        
-        .loading-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-          margin: 2rem 0;
-          padding: 2rem;
-          border: 2px solid #e5e7eb;
-          border-radius: 8px;
-          background-color: #f9fafb;
-          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .loading-spinner {
-          width: 40px;
-          height: 40px;
-          border: 4px solid #e5e7eb;
-          border-top: 4px solid #15803d;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
-        }
-        
-        .loading-container p {
-          color: #6b7280;
-          font-weight: 500;
-          margin: 0;
-        }
-        
-        .results-container {
-          margin-top: 2rem;
-        }
-        
-        .notion-section {
-          margin-top: 2rem;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 1rem;
-        }
-        
-        .notion-button {
-          padding: 12px 24px;
-          font-size: 16px;
-          font-weight: 600;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          transition: all 0.2s ease;
-          background-color: #15803d;
-          color: white;
-          box-shadow: 0 2px 4px rgba(21, 128, 61, 0.2);
-        }
-        
-        .notion-button:hover:not(:disabled) {
-          background-color: #166534;
-          transform: translateY(-2px);
-          box-shadow: 0 4px 8px rgba(21, 128, 61, 0.3);
-        }
-        
-        .notion-button:disabled {
-          background-color: #9ca3af;
-          cursor: not-allowed;
-          transform: none;
-        }
-        
-        .notion-status {
-          color: #6b7280;
-          font-weight: 500;
-          margin: 0;
-        }
-      `}</style>
+        {/* Display results if we have transcript and summary */}
+        {transcript && summary && (
+          <div className="space-y-8">
+            <SummaryCard transcript={transcript} summary={summary} />
+            
+            {/* Push to Notion button */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+              <div className="text-center">
+                <button 
+                  onClick={handlePushToNotion}
+                  disabled={pushingToNotion}
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+                >
+                  {pushingToNotion ? (
+                    <>
+                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+                      Pushing to Notion...
+                    </>
+                  ) : (
+                    '📝 Save to Notion'
+                  )}
+                </button>
+                
+                {/* Notion status message */}
+                {notionStatus && (
+                  <p className={`mt-4 text-sm font-medium ${
+                    notionStatus.includes('Successfully') 
+                      ? 'text-green-600' 
+                      : notionStatus.includes('Failed') 
+                        ? 'text-red-600' 
+                        : 'text-blue-600'
+                  }`}>
+                    {notionStatus}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 } 
